@@ -10,20 +10,20 @@ from config import RAW_SECONDARY_FILE, USER_AGENT
 
 HEADERS = {"User-Agent": USER_AGENT}
 
-def scrape_99acres_for_location(loc):
+def scrape_generic_portal_for_location(loc):
     city = loc["city"]
     state = loc["state"]
     rows = []
 
-    # TODO: replace with real URL and selectors
+    # Placeholder for other secondary sources if needed
     url = "https://www.magicbricks.com/builders-in-" + city.lower().replace(" ", "-")
     try:
         resp = requests.get(url, headers=HEADERS, timeout=30)
         if resp.status_code != 200:
-            print(f"[WARN] 99acres-like URL {url} status {resp.status_code}")
+            print(f"[WARN] URL {url} status {resp.status_code}")
             return rows
     except Exception as e:
-        print(f"[ERROR] 99acres-like fetch {url}: {e}")
+        print(f"[ERROR] fetch {url}: {e}")
         return rows
 
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -56,8 +56,8 @@ def scrape_secondary_portals(locations):
     all_rows = []
     for loc in locations:
         print(f"[INFO] Scraping secondary portals for {loc['city']}")
-        rows_99 = scrape_99acres_for_location(loc)
-        all_rows.extend(rows_99)
+        rows = scrape_generic_portal_for_location(loc)
+        all_rows.extend(rows)
 
     if all_rows:
         df = pd.DataFrame(all_rows)
