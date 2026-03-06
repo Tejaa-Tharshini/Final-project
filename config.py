@@ -29,7 +29,7 @@ USER_AGENT = (
 GEOCODER_USER_AGENT = "sgb_builder_monitor"
 
 # Firecrawl API key: best via environment variable
-FIRECRAWL_API_KEY = "fc-48f7936afbfa40b9adede20edfc343e1" 
+FIRECRAWL_API_KEY = "#your API Key" 
 USE_FIRECRAWL = True
 
 # in config.py
